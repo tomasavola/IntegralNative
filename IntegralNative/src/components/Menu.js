@@ -8,13 +8,13 @@ export default function Menu({ navigation }) {
         style={[styles.button]}
         onPress={() => navigation.navigate("BackgroundImageSelector")}
       >
-        <Text style={[styles.text]}>Background</Text>        
+        <Text style={[styles.text]}>Imagenes</Text>        
       </Pressable>
       <Pressable
         style={[styles.button]}
         onPress={() => navigation.navigate("UrlPlayer")}
       >
-        <Text style={[styles.text]}>Urls</Text>        
+        <Text style={[styles.text]}>Url</Text>        
       </Pressable>
       <Pressable
         style={[styles.button]}
@@ -26,13 +26,13 @@ export default function Menu({ navigation }) {
         style={[styles.button]}
         onPress={() => navigation.navigate("About")}
       >
-        <Text style={[styles.text]}>About</Text>        
+        <Text style={[styles.text]}>Qr and barcode</Text>        
       </Pressable>
       <Pressable
         style={[styles.button]}
         onPress={() => navigation.navigate("Configuration")}
       >
-        <Text style={[styles.text]}>Configuration</Text>        
+        <Text style={[styles.text]}>Settings</Text>        
       </Pressable>
     </View>
   );

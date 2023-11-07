@@ -8,7 +8,7 @@ import * as Clipboard from 'expo-clipboard';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 let dataService = new DataService();
-const NOMBRE_APP = 'Mariano Caceres'
+const NOMBRE_APP = 'Yifael'
 
 export default function About({ navigation }) {
 
