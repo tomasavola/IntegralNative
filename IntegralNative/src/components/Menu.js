@@ -8,31 +8,46 @@ export default function Menu({ navigation }) {
         style={[styles.button]}
         onPress={() => navigation.navigate("BackgroundImageSelector")}
       >
-        <Text style={[styles.text]}>Imagenes</Text>        
+        <Image
+          source={require("./image.png")} // Replace with the actual path to your image
+          style={{ width: 30, height: 30 }} // Adjust the width and height as needed
+        />          
       </Pressable>
       <Pressable
         style={[styles.button]}
         onPress={() => navigation.navigate("UrlPlayer")}
       >
-        <Text style={[styles.text]}>Url</Text>        
+        <Image
+          source={require("./url.png")} // Replace with the actual path to your image
+          style={{ width: 30, height: 30 }} // Adjust the width and height as needed
+        />              
       </Pressable>
       <Pressable
         style={[styles.button]}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("Fono")}
       >
-        <Text style={[styles.text]}>Home</Text>        
+        <Image
+          source={require("./fono.png")} // Replace with the actual path to your image
+          style={{ width: 30, height: 30 }} // Adjust the width and height as needed
+        />       
       </Pressable>
       <Pressable
         style={[styles.button]}
-        onPress={() => navigation.navigate("About")}
+        onPress={() => navigation.navigate("Qr")}
       >
-        <Text style={[styles.text]}>Qr and barcode</Text>        
+        <Image
+          source={require("./qr.png")} // Replace with the actual path to your image
+          style={{ width: 30, height: 30 }} // Adjust the width and height as needed
+        />           
       </Pressable>
       <Pressable
         style={[styles.button]}
         onPress={() => navigation.navigate("Configuration")}
       >
-        <Text style={[styles.text]}>Settings</Text>        
+       <Image
+          source={require("./settings.png")} // Replace with the actual path to your image
+          style={{ width: 30, height: 30 }} // Adjust the width and height as needed
+        />               
       </Pressable>
     </View>
   );
@@ -50,10 +65,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
   },
-  text: {
-    textAlign: "center",
-    color: 'black',
-  },
+
   button: {
     width: "20%",
     height: "100%",
@@ -63,7 +75,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: "black",
-    paddingHorizontal: 10
+    borderColor: "white",
+    paddingHorizontal: 10,
+    marginTop:"5%",
   },
 });

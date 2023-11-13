@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     modalViewError: {
         margin: 20,
-        backgroundColor: 'red',
+        backgroundColor: 'black',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',

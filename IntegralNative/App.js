@@ -2,11 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './src/screens/Home'
+import Fono from './src/screens/Fono'
 import Configuration from './src/screens/Configuration'
 import BackgroundImageSelector from './src/screens/BackgroundImageSelector'
 import UrlPlayer from './src/screens/UrlPlayer'
-import About from './src/screens/About'
+import Qr from './src/screens/Qr'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,14 +21,14 @@ export default function App() {
           animation: 'none', 
         }}>        
         <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{title: 'Home'}}
+          name="Fono"
+          component={Fono}
+          options={{title: 'Fono'}}
         />
         <Stack.Screen name="Configuration" component={Configuration} />
         <Stack.Screen name="BackgroundImageSelector" component={BackgroundImageSelector} />
         <Stack.Screen name="UrlPlayer" component={UrlPlayer} />
-        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Qr" component={Qr} />
       </Stack.Navigator>
     </NavigationContainer>
   );

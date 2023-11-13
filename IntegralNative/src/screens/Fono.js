@@ -11,7 +11,7 @@ import MessageConstants from '../constants/MessageConstants'
 
 let dataService = new DataService();
 
-export default function Home({ navigation }) {
+export default function Fono({ navigation }) {
   
   const [{ x, y, z }, setData] = useState({
     x: 0,

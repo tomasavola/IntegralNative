@@ -10,7 +10,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 let dataService = new DataService();
 const NOMBRE_APP = 'Yifael'
 
-export default function About({ navigation }) {
+export default function Qr({ navigation }) {
 
   const [image, setImage] = useState(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -59,12 +59,12 @@ export default function About({ navigation }) {
             <>
               <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
               <Text style={{ fontFamily: 'font', fontSize: 60 }}>{NOMBRE_APP}</Text>
-              <Boton onPress={copyToClipboard} titulo='Copiar el texto' style={styles.button} />
+              <Boton onPress={copyToClipboard} titulo='Copiar ' style={styles.button} />
             </>
           ) : (
             <></>
           )}
-          <Boton onPress={() => setScanQR(true)} titulo='Escanear APP' style={styles.button} />
+          <Boton onPress={() => setScanQR(true)} titulo='Escanear ' style={styles.button} />
           {scanQR ? (
             <>
               <BarCodeScanner
