@@ -8,7 +8,7 @@ import MessageConstants from '../constants/MessageConstants'
 
 let dataService = new DataService();
 
-export default function Configuration({ navigation }) {
+export default function Configuracion({ navigation }) {
 
   const [telefono, setTelefono] = useState();
   const [urlVideo, setUrlVideo] = useState();
@@ -36,8 +36,8 @@ export default function Configuration({ navigation }) {
 
   let loadBackground = async () => {
     if (JSON.parse(await dataService.obtenerBackground())) {
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+      let Background = JSON.parse(await dataService.obtenerBackground());
+      setImage(Background.uri);
     }
   }
 

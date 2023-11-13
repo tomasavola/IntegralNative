@@ -7,73 +7,78 @@ import * as Font from 'expo-font';
 import * as Clipboard from 'expo-clipboard';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-let dataService = new DataService();
+// Instancia de DataService
+let servicioDatos = new DataService();
 const NOMBRE_APP = 'Yifael'
 
 export default function Qr({ navigation }) {
 
-  const [image, setImage] = useState(null);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [scanQR, setScanQR] = useState(false);
+  const [imagen, setImagen] = useState(null);
+  const [fuentesCargadas, setFuentesCargadas] = useState(false);
+  const [permisos, setPermisos] = useState(null);
+  const [escaneado, setEscaneado] = useState(false);
+  const [escanearQR, setEscanearQR] = useState(false);
 
-  async function loadFonts() {
+  // Cargar fuentes
+  async function cargarFuentes() {
     await Font.loadAsync({
-      'font': require('../../assets/fonts/barcodeFont.ttf'),
+      'fuente': require('../../assets/fonts/barcodeFont.ttf'),
     });
-    setFontsLoaded(true)
+    setFuentesCargadas(true)
   }
 
-  let loadBackground = async () => {
-    if (JSON.parse(await dataService.obtenerBackground())) {
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+  // Cargar imagen de fondo
+  let cargarFondo = async () => {
+    if (JSON.parse(await servicioDatos.obtenerBackground())) {
+      let fondo = JSON.parse(await servicioDatos.obtenerBackground());
+      setImagen(fondo.uri);
     }
   }
 
-  const copyToClipboard = async () => {
+  // Copiar texto al portapapeles
+  const copiarAlPortapapeles = async () => {
     await Clipboard.setStringAsync(NOMBRE_APP);
   };
 
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  // Manejar escaneo de código de barras
+  const manejarEscaneoCodigoBarras = ({ type, data }) => {
+    setEscaneado(true);
+    alert(`Código de barras de tipo ${type} y datos ${data} ha sido escaneado!`);
   };
 
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
+    const obtenerPermisosEscaneoCodigoBarras = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setPermisos(status === 'granted');
     };
-    getBarCodeScannerPermissions();
-    loadBackground();
-    loadFonts();
+    obtenerPermisosEscaneoCodigoBarras();
+    cargarFondo();
+    cargarFuentes();
   }, []);
 
   return (
     <>
-      <SafeAreaView style={[styles.container]} >
-        <ImageBackground source={{ uri: image }} style={styles.image}>
-          {fontsLoaded ? (
+      <SafeAreaView style={[styles.contenedor]} >
+        <ImageBackground source={{ uri: imagen }} style={styles.imagen}>
+          {fuentesCargadas ? (
             <>
               <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
-              <Text style={{ fontFamily: 'font', fontSize: 60 }}>{NOMBRE_APP}</Text>
-              <Boton onPress={copyToClipboard} titulo='Copiar ' style={styles.button} />
+              <Text style={{ fontFamily: 'fuente', fontSize: 60 }}>{NOMBRE_APP}</Text>
+              <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
             </>
           ) : (
             <></>
           )}
-          <Boton onPress={() => setScanQR(true)} titulo='Escanear ' style={styles.button} />
-          {scanQR ? (
+          <Boton onPress={() => setEscanearQR(true)} titulo='Escanear ' style={styles.boton} />
+          {escanearQR ? (
             <>
               <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                onBarCodeScanned={escaneado ? undefined : manejarEscaneoCodigoBarras}
                 style={StyleSheet.absoluteFillObject}
               />
-              {scanned && <> 
-                <Boton onPress={() => setScanned(false)} titulo='Escanear de nuevo' style={styles.button} />
-                <Boton onPress={() => setScanQR(false)} titulo='Cerrar escanner' style={styles.button} />
+              {escaneado && <>
+                <Boton onPress={() => setEscaneado(false)} titulo='Escanear de nuevo' style={styles.boton} />
+                <Boton onPress={() => setEscanearQR(false)} titulo='Cerrar escáner' style={styles.boton} />
               </>
               }
             </>
@@ -88,7 +93,7 @@ export default function Qr({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contenedor: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -96,14 +101,14 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff'
   },
-  button: {
+  boton: {
     marginTop: 20,
     width: 300,
     height: 60,
     backgroundColor: 'black',
     borderRadius: 10
   },
-  image: {
+  imagen: {
     width: '100%',
     flex: 1,
     alignItems: 'center',

@@ -15,7 +15,7 @@ export default function Menu({ navigation }) {
       </Pressable>
       <Pressable
         style={[styles.button]}
-        onPress={() => navigation.navigate("UrlPlayer")}
+        onPress={() => navigation.navigate("Url")}
       >
         <Image
           source={require("./url.png")} // Replace with the actual path to your image
@@ -42,7 +42,7 @@ export default function Menu({ navigation }) {
       </Pressable>
       <Pressable
         style={[styles.button]}
-        onPress={() => navigation.navigate("Configuration")}
+        onPress={() => navigation.navigate("Configuracion")}
       >
        <Image
           source={require("./settings.png")} // Replace with the actual path to your image

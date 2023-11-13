@@ -7,7 +7,7 @@ import Boton from '../components/Boton';
 
 let dataService = new DataService();
 
-export default function UrlPlayer({ navigation }) {
+export default function Url({ navigation }) {
 
   const video = useRef(null);
   const [status, setStatus] = React.useState({});
@@ -19,8 +19,8 @@ export default function UrlPlayer({ navigation }) {
 
   let loadBackground = async () => {
     if (JSON.parse(await dataService.obtenerBackground())) {
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+      let Background = JSON.parse(await dataService.obtenerBackground());
+      setImage(Background.uri);
     }
   }
 

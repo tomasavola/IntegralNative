@@ -1,23 +1,22 @@
-import { View, Text, StyleSheet, SafeAreaView, Button, Image, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, Button, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
-import React from 'react'
-import Menu from '../components/Menu'
+import React from 'react';
+import Menu from '../components/Menu';
 import * as ImagePicker from 'expo-image-picker';
 import DataService from '../services/DataService';
 import Boton from '../components/Boton';
 import { Camera, CameraType } from 'expo-camera';
 
-let dataService = new DataService()
+let dataService = new DataService();
 
-export default function BackgroundImageSelector({ navigation }) {
+export default function Background({ navigation }) {
 
   const [image, setImage] = useState(null);
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [startCamera, setStartCamera] = useState(false)
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
+  const seleccionarImagen = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -27,55 +26,56 @@ export default function BackgroundImageSelector({ navigation }) {
 
     if (!result.canceled) {
       await dataService.guardarBackground(JSON.stringify(result.assets[0]));
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+      let background = JSON.parse(await dataService.obtenerBackground());
+      setImage(background.uri);
     }
   };
 
-  const __startCamera = async () => {
+  const __abrirCamara = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync()
     if (status === 'granted') {
       setStartCamera(true)
     } else {
-      Alert.alert('Access denied')
+      Alert.alert('Acceso denegado')
     }
   }
 
-  const __takePicture = async () => {
+  const __sacarFoto = async () => {
     if (!camera) return
     const photo = await camera.takePictureAsync();
     await dataService.guardarBackground(JSON.stringify(photo));
-    let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-    setImage(backgroundImage.uri);
+    let background = JSON.parse(await dataService.obtenerBackground());
+    setImage(background.uri);
     setStartCamera(false)
   }
 
-  let loadBackground = async () => {
+  let seleccionarBackground = async () => {
     if (JSON.parse(await dataService.obtenerBackground())) {
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+      let background = JSON.parse(await dataService.obtenerBackground());
+      setImage(background.uri);
     }
   }
 
   useEffect(() => {
-    loadBackground();
+    seleccionarBackground();
   }, []);
 
   const eliminarBackground = async () => {
     try {
       await dataService.eliminarBackground();
       setImage(null);
-      console.log('Background image removed successfully');
+      console.log('Imagen de fondo eliminada exitosamente');
     } catch (error) {
-      console.log('Failed to remove background image:', error);
-      Alert.alert('Failed to remove background image');
+      console.log('Error al eliminar la imagen de fondo:', error);
+      Alert.alert('Error al eliminar la imagen de fondo');
     }
   };
+
   return (
     <SafeAreaView style={[styles.container]}>
       <ImageBackground source={{ uri: image }} style={styles.image}>
-        <Boton onPress={pickImage} titulo='Elegi una imagen de tu galeria' style={styles.button} />
-        <Boton onPress={eliminarBackground} titulo='Eliminar Background' style={styles.button} />
+        <Boton onPress={seleccionarImagen} titulo='Elegir una imagen de tu galería' style={styles.button} />
+        <Boton onPress={eliminarBackground} titulo='Eliminar Imagen de Fondo' style={styles.button} />
         {startCamera ? (
           <Camera
             style={{ flex: 1, width: "100%" }}
@@ -86,7 +86,6 @@ export default function BackgroundImageSelector({ navigation }) {
             <View
               style={styles.cameraContainer}
             >
-             
               <View
                 style={{
                   alignSelf: 'center',
@@ -95,7 +94,7 @@ export default function BackgroundImageSelector({ navigation }) {
                 }}
               >
                 <TouchableOpacity
-                  onPress={__takePicture}
+                  onPress={__sacarFoto}
                   style={{
                     width: 70,
                     height: 70,
@@ -109,7 +108,7 @@ export default function BackgroundImageSelector({ navigation }) {
           </Camera>
         ) : (
           <>
-            <Boton onPress={__startCamera} titulo='Sacar una foto' style={styles.button} />
+            <Boton onPress={__abrirCamara} titulo='Tomar una foto' style={styles.button} />
           </>
         )}
       </ImageBackground>

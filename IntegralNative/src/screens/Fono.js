@@ -27,21 +27,21 @@ export default function Fono({ navigation }) {
   const _slow = () => Accelerometer.setUpdateInterval(1000);
   const _fast = () => Accelerometer.setUpdateInterval(16);
 
-  const callNumber = (phone) => {
-    console.log('callNumber ----> ', phone);
-    let phoneNumber = phone;
+  const NumeroTelefono = (fono) => {
+    console.log('Numero de telefono ----> ', fono);
+    let numero = fono;
     if (Platform.OS !== 'android') {
-      phoneNumber = `telprompt:${phone}`;
+      numero = `telprompt:${fono}`;
     }
     else {
-      phoneNumber = `tel:${phone}`;
+      numero = `tel:${fono}`;
     }
-    Linking.canOpenURL(phoneNumber)
+    Linking.canOpenURL(numero)
       .then(supported => {
         if (!supported) {
-          Alert.alert('Phone number is not available');
+          Alert.alert('Numero de fono no disponible');
         } else {
-          return Linking.openURL(phoneNumber);
+          return Linking.openURL(numero);
         }
       })
       .catch(err => console.log(err));
@@ -56,7 +56,7 @@ export default function Fono({ navigation }) {
           let datos = await dataService.obtenerDatos();
           let telefono = datos.telefono;
           if (telefono) {
-            callNumber(telefono)
+            NumeroTelefono(telefono)
           } else {
             setMensajeModal(MessageConstants.MSG_TELEFONO_UNDEFINED);
             setModalVisible(true)
@@ -69,7 +69,7 @@ export default function Fono({ navigation }) {
             let datos = await dataService.obtenerDatos();
             let telefono = datos.telefono;
             if (telefono) {
-              callNumber(telefono)
+              NumeroTelefono(telefono)
             } else {
               setMensajeModal(MessageConstants.MSG_TELEFONO_UNDEFINED);
               setModalVisible(true)
@@ -89,8 +89,8 @@ export default function Fono({ navigation }) {
 
   let loadBackground = async () => {
     if(JSON.parse(await dataService.obtenerBackground())){
-      let backgroundImage = JSON.parse(await dataService.obtenerBackground());
-      setImage(backgroundImage.uri);
+      let Background = JSON.parse(await dataService.obtenerBackground());
+      setImage(Background.uri);
     }    
   }
 
