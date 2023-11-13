@@ -35,7 +35,6 @@ export default function BackgroundImageSelector({ navigation }) {
   const __startCamera = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync()
     if (status === 'granted') {
-      // start the camera
       setStartCamera(true)
     } else {
       Alert.alert('Access denied')
@@ -62,10 +61,21 @@ export default function BackgroundImageSelector({ navigation }) {
     loadBackground();
   }, []);
 
+  const eliminarBackground = async () => {
+    try {
+      await dataService.eliminarBackground();
+      setImage(null);
+      console.log('Background image removed successfully');
+    } catch (error) {
+      console.log('Failed to remove background image:', error);
+      Alert.alert('Failed to remove background image');
+    }
+  };
   return (
     <SafeAreaView style={[styles.container]}>
       <ImageBackground source={{ uri: image }} style={styles.image}>
         <Boton onPress={pickImage} titulo='Elegi una imagen de tu galeria' style={styles.button} />
+        <Boton onPress={eliminarBackground} titulo='Eliminar Background' style={styles.button} />
         {startCamera ? (
           <Camera
             style={{ flex: 1, width: "100%" }}
@@ -76,6 +86,7 @@ export default function BackgroundImageSelector({ navigation }) {
             <View
               style={styles.cameraContainer}
             >
+             
               <View
                 style={{
                   alignSelf: 'center',

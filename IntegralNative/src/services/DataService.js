@@ -33,7 +33,6 @@ export default class DataService{
     }; 
 
     guardarBackground = async(background) => { 
-        //Almacena las credenciales en el asyncStorage
         try {    
             await AsyncStorage.setItem(BACKGROUND_KEY, background);  
             return true;
@@ -42,6 +41,16 @@ export default class DataService{
             return false;
         }
     }; 
+
+    eliminarBackground = async () => {
+        try {
+          await AsyncStorage.removeItem(BACKGROUND_KEY);
+          return true;
+        } catch (e) {
+          console.log(e);
+          return false;
+        }
+      };
 
     obtenerBackground = async() => { 
         let storedBackground = await AsyncStorage.getItem(BACKGROUND_KEY);
