@@ -1,29 +1,28 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, Image } from 'react-native'
 import React, { useState, useEffect } from 'react';
-import Menu from '../components/Menu'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground } from 'react-native';
+import Menu from '../components/Menu';
 import DataService from '../services/DataService';
-import Boton from '../components/Boton'
+import Boton from '../components/Boton';
 import * as Clipboard from 'expo-clipboard';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Button, Icon } from 'react-native-elements';
+
 
 let servicioDatos = new DataService();
-const NOMBRE_APP = 'Yifael'
+const NOMBRE_APP = 'Yifael';
 
 export default function Qr({ navigation }) {
-
   const [img, setImg] = useState(null);
   const [permisos, setPermisos] = useState(null);
   const [escaneado, setEscaneado] = useState(false);
   const [escanearQR, setEscanearQR] = useState(false);
-
-  
 
   let cargarFondo = async () => {
     if (JSON.parse(await servicioDatos.obtenerBackground())) {
       let fondo = JSON.parse(await servicioDatos.obtenerBackground());
       setImg(fondo.uri);
     }
-  }
+  };
 
   const copiarAlPortapapeles = async () => {
     await Clipboard.setStringAsync(NOMBRE_APP);
@@ -41,42 +40,42 @@ export default function Qr({ navigation }) {
     };
     obtenerPermisosEscaneoCodigoBarras();
     cargarFondo();
-    }, []);
+  }, []);
 
   return (
-    <>
-      <SafeAreaView style={[styles.contenedor]} >
-        <ImageBackground source={{ uri: img }} style={styles.img}>
-          {(
-            <>
-              <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
-              <Text style={{ fontFamily: 'fuente', fontSize: 60 }}>{NOMBRE_APP}</Text>
-              <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
-            </>
-          )(
-            <></>
-          )}
-          <Boton onPress={() => setEscanearQR(true)} titulo='Escanear ' style={styles.boton} />
-          {escanearQR ? (
-            <>
-              <BarCodeScanner
-                onBarCodeScanned={escaneado ? undefined : manejarEscaneoCodigoBarras}
-                style={StyleSheet.absoluteFillObject}
-              />
-              {escaneado && <>
-                <Boton onPress={() => setEscaneado(false)} titulo='Escanear de nuevo' style={styles.boton} />
-                <Boton onPress={() => setEscanearQR(false)} titulo='Cerrar escáner' style={styles.boton} />
-              </>
-              }
-            </>
-          ) : (
-            <></>
-          )}
-        </ImageBackground>
-        <Menu navigation={navigation} />
-      </SafeAreaView>
-    </>
-  )
+    <SafeAreaView style={styles.contenedor}>
+      <ImageBackground source={{ uri: img }} style={styles.img}>
+        {escaneado ? (
+          <>
+            <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
+            <Text style={{ fontFamily: 'fuente', fontSize: 60 }}>{NOMBRE_APP}</Text>
+            <Button
+          titulo="Cámara"
+          buttonStyle={styles.button}
+          titleStyle={{ color: 'white' }}
+          onPress={copiarAlPortapapeles}
+          icon={<Icon name="document" color="white" />}
+        />
+            <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
+            <Boton onPress={() => setEscaneado(false)} titulo='Escanear de nuevo' style={styles.boton} />
+            <Boton onPress={() => setEscanearQR(false)} titulo='Cerrar escáner' style={styles.boton} />
+          </>
+        ) : (
+          <>
+            <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
+            <Boton onPress={() => setEscanearQR(true)} titulo='Escanear ' style={styles.boton} />
+          </>
+        )}
+        {escanearQR && (
+          <BarCodeScanner
+            onBarCodeScanned={escaneado ? undefined : manejarEscaneoCodigoBarras}
+            style={StyleSheet.absoluteFillObject}
+          />
+        )}
+      </ImageBackground>
+      <Menu navigation={navigation} />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -86,14 +85,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   boton: {
     marginTop: 20,
     width: 300,
     height: 60,
     backgroundColor: 'black',
-    borderRadius: 10
+    borderRadius: 10,
   },
   img: {
     width: '100%',
