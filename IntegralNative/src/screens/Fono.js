@@ -28,7 +28,7 @@ export default function Fono({ navigation }) {
   const _fast = () => Accelerometer.setUpdateInterval(16);
 
   const NumeroTelefono = (fono) => {
-    console.log('Numero de telefono ----> ', fono);
+    console.log('Numero de fono ñeri ----> ', fono);
     let numero = fono;
     if (Platform.OS !== 'android') {
       numero = `telprompt:${fono}`;

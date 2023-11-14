@@ -10,7 +10,7 @@ let dataService = new DataService();
 
 export default function Configuracion({ navigation }) {
 
-  const [telefono, setTelefono] = useState();
+  const [fono, setFono] = useState();
   const [urlVideo, setUrlVideo] = useState();
   const [urlMusica, setUrlMusica] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,8 +19,8 @@ export default function Configuracion({ navigation }) {
   const [image, setImage] = useState(null);
 
   let handleSubmit = async () => {
-    if (telefono && urlMusica && urlVideo) {
-      if (await dataService.almacenarDatos(telefono, urlVideo, urlMusica)) {
+    if (fono && urlMusica && urlVideo) {
+      if (await dataService.almacenarDatos(fono, urlVideo, urlMusica)) {
         setMensajeModal(MessageConstants.MSG_DATOS_GUARDADOS);
         setSuccess(true)
       } else {
@@ -34,7 +34,7 @@ export default function Configuracion({ navigation }) {
     setModalVisible(true)
   }
 
-  let loadBackground = async () => {
+  let cargarBackground = async () => {
     if (JSON.parse(await dataService.obtenerBackground())) {
       let Background = JSON.parse(await dataService.obtenerBackground());
       setImage(Background.uri);
@@ -42,19 +42,19 @@ export default function Configuracion({ navigation }) {
   }
 
   useEffect(() => {
-    loadBackground();
+    cargarBackground();
   }, []);
 
   return (
     <SafeAreaView style={[styles.container]}>
       <ImageBackground source={{ uri: image }} style={styles.image}>
-        <Text style={[styles.textLabel]}>Telefono</Text>
+        <Text style={[styles.textLabel]}>Fono</Text>
         <TextInput
           editable
           style={styles.input}
-          placeholder="Ingrese un telefono de emergencia"
+          placeholder="Ingrese un numero de fono"
           keyboardType="numeric"
-          onChangeText={input => setTelefono(input)}
+          onChangeText={input => setFono(input)}
         />
         <Text style={[styles.textLabel]}>URL Video</Text>
         <TextInput

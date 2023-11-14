@@ -11,7 +11,7 @@ export default function Url({ navigation }) {
 
   const video = useRef(null);
   const [status, setStatus] = React.useState({});
-  const [image, setImage] = useState(null);
+  const [img, setImg] = useState(null);
   const [videoUrl, setVideo] = useState(undefined);
   const [musicaUrl, setMusica] = useState(undefined);
   const [sound, setSound] = useState();
@@ -20,7 +20,7 @@ export default function Url({ navigation }) {
   let loadBackground = async () => {
     if (JSON.parse(await dataService.obtenerBackground())) {
       let Background = JSON.parse(await dataService.obtenerBackground());
-      setImage(Background.uri);
+      setImg(Background.uri);
     }
   }
 
@@ -72,7 +72,7 @@ export default function Url({ navigation }) {
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <ImageBackground source={{ uri: image }} style={styles.image}>
+      <ImageBackground source={{ uri: img }} style={styles.img}>
         <Text style={{ backgroundColor: 'white', fontSize: 20, width: '80%', textAlign: 'center' }}>MultimediaScreen</Text>
         {videoUrl ? (
           <>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderRadius: 10
   },
-  image: {
+  img: {
     width: '100%',
     flex: 1,
     alignItems: 'center',

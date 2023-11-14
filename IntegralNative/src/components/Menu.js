@@ -44,7 +44,7 @@ export default function Menu({ navigation }) {
         style={[styles.button]}
         onPress={() => navigation.navigate("Configuracion")}
       >
-       <Image
+      <Image
           source={require("./settings.png")} // Replace with the actual path to your image
           style={{ width: 30, height: 30 }} // Adjust the width and height as needed
         />               

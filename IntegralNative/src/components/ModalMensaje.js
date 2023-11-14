@@ -49,7 +49,7 @@ export default function ModalMensaje({ mensaje, modalVisible, setModalVisible, s
 const styles = StyleSheet.create({
     modalViewSuccess: {
         margin: 20,
-        backgroundColor: 'green',
+        backgroundColor: 'blue',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     modalViewError: {
         margin: 20,
-        backgroundColor: 'black',
+        backgroundColor: 'withe',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F194FF',
     },
     buttonClose: {
-        backgroundColor: 'black',
+        backgroundColor: 'red',
     },
     textStyle: {
         color: 'white',

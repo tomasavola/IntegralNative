@@ -31,12 +31,10 @@ export default function Background({ navigation }) {
     }
   };
 
-  const __abrirCamara = async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync()
-    if (status === 'granted') {
-      setStartCamera(true)
-    } else {
-      Alert.alert('Acceso denegado')
+  let seleccionarBackground = async () => {
+    if (JSON.parse(await dataService.obtenerBackground())) {
+      let background = JSON.parse(await dataService.obtenerBackground());
+      setImage(background.uri);
     }
   }
 
@@ -49,10 +47,12 @@ export default function Background({ navigation }) {
     setStartCamera(false)
   }
 
-  let seleccionarBackground = async () => {
-    if (JSON.parse(await dataService.obtenerBackground())) {
-      let background = JSON.parse(await dataService.obtenerBackground());
-      setImage(background.uri);
+  const __abrirCamara = async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync()
+    if (status === 'granted') {
+      setStartCamera(true)
+    } else {
+      Alert.alert('Acceso denegado')
     }
   }
 

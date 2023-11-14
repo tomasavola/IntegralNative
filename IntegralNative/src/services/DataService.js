@@ -8,7 +8,16 @@ const MUSICA_KEY='musica';
 const BACKGROUND_KEY='background';
 
 export default class DataService{ 
-    //Elimina las credenciales almacenadas al cerrar sesión 
+    guardarBackground = async(background) => { 
+        try {    
+            await AsyncStorage.setItem(BACKGROUND_KEY, background);  
+            return true;
+        } catch(e) {    
+            console.log(e);
+            return false;
+        }
+    }; 
+
     eliminarDatos = async() => { 
         try{
             await AsyncStorage.removeItem(TELEFONO_KEY); 
@@ -19,8 +28,25 @@ export default class DataService{
         }
     }; 
 
+    obtenerDatos = async() => { 
+        let storedTelefono = await AsyncStorage.getItem(TELEFONO_KEY);
+        let storedVideo = await AsyncStorage.getItem(VIDEO_KEY);
+        let storedMusica = await AsyncStorage.getItem(MUSICA_KEY);
+        const returnValue = {'telefono':storedTelefono, 'video':storedVideo, 'musica':storedMusica}; 
+        return returnValue; 
+    }; 
+
+    eliminarBackground = async () => {
+        try {
+        await AsyncStorage.removeItem(BACKGROUND_KEY);
+        return true;
+        } catch (e) {
+        console.log(e);
+        return false;
+        }
+    };
+
     almacenarDatos = async(telefono, video, musica) => { 
-        //Almacena las credenciales en el asyncStorage
         try {    
             await AsyncStorage.setItem(TELEFONO_KEY, telefono);  
             await AsyncStorage.setItem(VIDEO_KEY, video); 
@@ -32,37 +58,9 @@ export default class DataService{
         }
     }; 
 
-    guardarBackground = async(background) => { 
-        try {    
-            await AsyncStorage.setItem(BACKGROUND_KEY, background);  
-            return true;
-        } catch(e) {    
-            console.log(e);
-            return false;
-        }
-    }; 
-
-    eliminarBackground = async () => {
-        try {
-          await AsyncStorage.removeItem(BACKGROUND_KEY);
-          return true;
-        } catch (e) {
-          console.log(e);
-          return false;
-        }
-      };
-
     obtenerBackground = async() => { 
         let storedBackground = await AsyncStorage.getItem(BACKGROUND_KEY);
         const returnValue = storedBackground; 
-        return returnValue; 
-    }; 
-
-    obtenerDatos = async() => { 
-        let storedTelefono = await AsyncStorage.getItem(TELEFONO_KEY);
-        let storedVideo = await AsyncStorage.getItem(VIDEO_KEY);
-        let storedMusica = await AsyncStorage.getItem(MUSICA_KEY);
-        const returnValue = {'telefono':storedTelefono, 'video':storedVideo, 'musica':storedMusica}; 
         return returnValue; 
     }; 
 } 
