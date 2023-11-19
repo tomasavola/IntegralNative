@@ -105,7 +105,7 @@ export default function Fono({ navigation }) {
   return (
     <SafeAreaView style={[styles.container]}>
       <ImageBackground source={{uri: image}} style={styles.image}>
-        <Text style={{backgroundColor:'white', fontSize: 20, width: '80%', textAlign:'center'}}>Agita el celular para llamar a tu contacto de emergencia</Text>
+        <Text style={{backgroundColor:'white', fontSize: 20, width: '80%', textAlign:'center'}}>Agita para llamar a tu contacto de emergencia</Text>
         <ModalMensaje mensaje={mensajeModal} modalVisible={modalVisible} setModalVisible={setModalVisible} success={success}/>
       </ImageBackground>
       <Menu navigation={navigation} />
