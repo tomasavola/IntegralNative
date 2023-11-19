@@ -5,7 +5,8 @@ import DataService from '../services/DataService';
 import Boton from '../components/Boton';
 import * as Clipboard from 'expo-clipboard';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import { Icon } from '@rneui/themed';
 
 
 let servicioDatos = new DataService();
@@ -49,21 +50,25 @@ export default function Qr({ navigation }) {
           <>
             <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
             <Text style={{ fontFamily: 'fuente', fontSize: 60 }}>{NOMBRE_APP}</Text>
-            <Button
-          titulo="Cámara"
-          buttonStyle={styles.button}
-          titleStyle={{ color: 'white' }}
-          onPress={copiarAlPortapapeles}
-          icon={<Icon name="document" color="white" />}
-        />
+            
             <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
             <Boton onPress={() => setEscaneado(false)} titulo='Escanear de nuevo' style={styles.boton} />
             <Boton onPress={() => setEscanearQR(false)} titulo='Cerrar escáner' style={styles.boton} />
           </>
         ) : (
           <>
-            <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
-            <Boton onPress={() => setEscanearQR(true)} titulo='Escanear ' style={styles.boton} />
+            <Button
+          title="Escanear"
+          buttonStyle={styles.button}
+          titleStyle={{ color: 'white' }}
+          onPress={() => setEscanearQR(true)}
+        />
+            <Button
+          title="Copiar"
+          buttonStyle={styles.button}
+          titleStyle={{ color: 'white' }}
+          onPress={copiarAlPortapapeles}
+        />
           </>
         )}
         {escanearQR && (
@@ -86,6 +91,13 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: '#fff',
+  },
+  button: {
+    marginTop: 20,
+    width: 300,
+    height: 60,
+    backgroundColor: "#33A2FF",
+    borderRadius: 10,
   },
   boton: {
     marginTop: 20,

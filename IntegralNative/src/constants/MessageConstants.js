@@ -1,8 +1,8 @@
 
 const MessageConstants = {
-    MSG_CAMPOS_INCOMPLETOS: 'Debe completar los campos',
-    MSG_GUARDADO_FALLIDO: 'No fue posible guardar los campos',
-    MSG_DATOS_GUARDADOS: 'Datos guardados',
-    MSG_TELEFONO_UNDEFINED: 'No se ha definido un numero de emergencia'
+    MSG_CAMPOS_INCOMPLETOS: 'DATOS INCOMPLETOS',
+    MSG_GUARDADO_FALLIDO: 'NO SE GUARDARON LOS DATOS :(',
+    MSG_DATOS_GUARDADOS: 'DATOS GUARDADOS CON EXITO :)',
+    MSG_TELEFONO_UNDEFINED: 'NO HAY NUMERO DE EMERGENCIA.'
 }
 export default MessageConstants;

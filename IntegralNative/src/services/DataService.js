@@ -18,6 +18,20 @@ export default class DataService{
         }
     }; 
 
+    almacenarDatos = async(telefono, video, musica) => { 
+        //Almacena las credenciales en el asyncStorage
+        try {    
+            await AsyncStorage.setItem(TELEFONO_KEY, telefono);  
+            await AsyncStorage.setItem(VIDEO_KEY, video); 
+            await AsyncStorage.setItem(MUSICA_KEY, musica); 
+            return true;
+        } catch(e) {    
+            console.log(e);
+            return false;
+        }
+    }; 
+
+
     eliminarDatos = async() => { 
         try{
             await AsyncStorage.removeItem(TELEFONO_KEY); 
