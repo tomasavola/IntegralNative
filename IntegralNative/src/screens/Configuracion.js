@@ -90,26 +90,24 @@ export default function Configuracion({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
-
   input: {
     height: 50,
     width: '95%',
-    margin: 12,
+    marginVertical: 10,
     borderWidth: 1,
+    borderColor: '#33A2FF', // Set your desired border color
+    borderRadius: 8, // Set your desired border radius
     padding: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   textLabel: {
-    alignSelf: 'flex-start',
     marginLeft: '5%',
     marginTop: 5,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'left', // Align text to the left
   },
   image: {
     width: '100%',
@@ -117,19 +115,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   button: {
     marginTop: 20,
     width: 300,
     height: 60,
-    backgroundColor: "#33A2FF",
-    borderRadius: 10,
-  },
-  button: {
-    marginTop: 20,
-    width: 300,
-    height: 60,
-    backgroundColor: "#33A2FF",
+    backgroundColor: '#33A2FF',
     borderRadius: 10,
   },
 });
