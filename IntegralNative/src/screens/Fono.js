@@ -24,8 +24,7 @@ export default function Fono({ navigation }) {
   const [mensajeModal, setMensajeModal] = useState('');
   const [image, setImage] = useState(null);
 
-  const _slow = () => Accelerometer.setUpdateInterval(1000);
-  const _fast = () => Accelerometer.setUpdateInterval(16);
+  
 
   const NumeroTelefono = (fono) => {
     console.log('Numero de fono ñeri ----> ', fono);
@@ -97,7 +96,6 @@ export default function Fono({ navigation }) {
   useEffect(() => {
     loadBackground();
     _subscribe();
-    _slow();
     return () => _unsubscribe();    
   }, []);
 

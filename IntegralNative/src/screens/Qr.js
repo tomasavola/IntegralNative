@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ImageBackground } from 'react-native';
 import Menu from '../components/Menu';
 import DataService from '../services/DataService';
-import Boton from '../components/Boton';
 import * as Clipboard from 'expo-clipboard';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Button } from 'react-native-elements';
@@ -51,9 +50,7 @@ export default function Qr({ navigation }) {
             <Text style={{ fontSize: 20 }}>{NOMBRE_APP}</Text>
             <Text style={{ fontFamily: 'fuente', fontSize: 60 }}>{NOMBRE_APP}</Text>
             
-            <Boton onPress={copiarAlPortapapeles} titulo='Copiar ' style={styles.boton} />
-            <Boton onPress={() => setEscaneado(false)} titulo='Escanear de nuevo' style={styles.boton} />
-            <Boton onPress={() => setEscanearQR(false)} titulo='Cerrar escáner' style={styles.boton} />
+            
           </>
         ) : (
           <>
@@ -97,13 +94,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 60,
     backgroundColor: "#33A2FF",
-    borderRadius: 10,
-  },
-  boton: {
-    marginTop: 20,
-    width: 300,
-    height: 60,
-    backgroundColor: 'black',
     borderRadius: 10,
   },
   img: {

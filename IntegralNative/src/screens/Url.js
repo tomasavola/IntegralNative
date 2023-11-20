@@ -1,10 +1,9 @@
-import { View, Text, StyleSheet, SafeAreaView, ImageBackground, Button } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react';
 import Menu from '../components/Menu'
 import DataService from '../services/DataService';
 import { Video, ResizeMode, Audio } from 'expo-av';
-import Boton from '../components/Boton';
-
+import { Button,Icon } from 'react-native-elements';
 let dataService = new DataService();
 
 export default function Url({ navigation }) {
@@ -87,19 +86,21 @@ export default function Url({ navigation }) {
               isLooping
               onPlaybackStatusUpdate={status => setStatus(() => status)}
             />
-            <Boton onPress={() => status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()} titulo={status.isPlaying ? 'Pausar video' : 'Reproducir video'} style={styles.button1} />
+            <Button onPress={() => status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()} titulo={status.isPlaying ? 'Pausar video' : 'Reproducir video'} style={styles.button1} />
             
           </>
         ) : (
           <></>
         )}
         {sound ? (
+
+          /*PREGUNTAR XQ NO FUNCIONA MULTIMEDIA Y EL BOTON*/
           <>
-            <Boton onPress={reproduceSound} titulo={isSoundReproducing ? 'Pausar audio' : 'Reproducir audio'} style={styles.button2} />
+            <button onPress={reproduceSound} titulo={isSoundReproducing ? 'Pausar audio' : 'Reproducir audio'} style={styles.button} />
           </>
         ) : (
           <>
-            <Text style={{ backgroundColor: 'white', fontSize: 15, width: '80%', textAlign: 'center' }}>No hay archivos disponibles</Text>
+            <Text style={{ backgroundColor: 'white', fontSize: 15, width: '80%', textAlign: 'center' }}>Tiene que agregar el archivo en ajustes</Text>
           </>
         )}
       </ImageBackground>
@@ -117,19 +118,13 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff'
   },
-  button1: {
+
+  button: {
     marginTop: 20,
-    width: 300,
+    width: 500,
     height: 60,
-    backgroundColor: 'green',
-    borderRadius: 10
-  },
-  button2: {
-    marginTop: 20,
-    width: 300,
-    height: 60,
-    backgroundColor: 'blue',
-    borderRadius: 10
+    backgroundColor: "#33A2FF",
+    borderRadius: 10,
   },
   img: {
     width: '100%',

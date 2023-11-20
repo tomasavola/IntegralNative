@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, SafeAreaView, TextInput, ImageBackground } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import Menu from '../components/Menu'
-import Boton from '../components/Boton'
 import DataService from '../services/DataService'
 import ModalMensaje from '../components/ModalMensaje'
 import MessageConstants from '../constants/MessageConstants'
+import { Button,Icon } from 'react-native-elements';
 
 let dataService = new DataService();
 
@@ -72,7 +72,14 @@ export default function Configuracion({ navigation }) {
           placeholder="Ingrese una url de una cancion"
           onChangeText={input => setUrlMusica(input)}
         />
-        <Boton onPress={handleSubmit} titulo='INGRESAR DATOS' style={styles.button} />
+
+       <Button
+          title="Ingresar"
+          buttonStyle={styles.button}
+          titleStyle={{ color: 'white' }}
+          onPress={handleSubmit}
+        />
+    
       </ImageBackground>
       <ModalMensaje mensaje={mensajeModal} modalVisible={modalVisible} setModalVisible={setModalVisible} success={success} />
       <Menu navigation={navigation} />
@@ -111,6 +118,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  button: {
+    marginTop: 20,
+    width: 300,
+    height: 60,
+    backgroundColor: "#33A2FF",
+    borderRadius: 10,
+  },
   button: {
     marginTop: 20,
     width: 300,
